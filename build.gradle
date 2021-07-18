@@ -1,0 +1,42 @@
+plugins {
+    id 'org.springframework.boot' version "$spring_boot_version"
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+configurations {
+    all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web-tomcat'
+}
+
+subprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+
+    // 依赖统一定义
+    apply from: rootProject.file('dependencies.gradle')
+
+    // group、version 统一，name 单独定义
+    group "$group"
+    version "$version"
+    sourceCompatibility = '1.8'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    // 解决多模块打包找不到类问题
+    if (it.name != 'app') {
+        bootJar {
+            enabled = false
+        }
+        jar {
+            enabled = true
+        }
+    }
+}

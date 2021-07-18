@@ -1,0 +1,5 @@
+rootProject.name = 'OneSpring'
+include 'app'
+include 'blog'
+include 'util'
+

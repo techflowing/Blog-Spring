@@ -1,0 +1,11 @@
+bootJar {
+    baseName 'OneSpring'
+}
+
+dependencies {
+    implementation deps.spring_boot.starter_web
+    implementation deps.spring_boot.mybatis
+    implementation deps.tools.flywaydb
+
+    testImplementation deps.test.spring_boot_starter_test
+}

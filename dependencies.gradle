@@ -1,0 +1,37 @@
+/**
+ * 本地配置
+ */
+def properties = new Properties()
+def localFile = new File(rootProject.rootDir, "local.properties")
+if (localFile.canRead()) {
+    properties.load(localFile.newDataInputStream())
+}
+
+/**
+ * Spring Boot 系列
+ */
+def spring_boot = [
+        starter_web: 'org.springframework.boot:spring-boot-starter-web',
+        mybatis    : 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+]
+
+/**
+ * 三方库
+ */
+def tools = [
+        flywaydb: 'org.flywaydb:flyway-core'
+]
+
+/**
+ * 测试
+ */
+def test = [
+        spring_boot_starter_test: 'org.springframework.boot:spring-boot-starter-test'
+]
+
+ext.deps = [
+        "spring_boot"    : spring_boot,
+        "tools"          : tools,
+        "test"           : test,
+        "localProperties": properties
+]
