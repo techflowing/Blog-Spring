@@ -1,3 +1,6 @@
 dependencies {
-
+    implementation deps.tools.gson
+    implementation deps.tools.commons_codec
+    implementation deps.tools.commons_io
+    implementation deps.spring_boot.base
 }

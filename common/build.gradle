@@ -1,0 +1,5 @@
+dependencies {
+    implementation deps.spring_boot.base
+    implementation deps.spring_boot.mybatis
+    implementation deps.module.util
+}

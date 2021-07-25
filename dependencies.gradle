@@ -11,15 +11,35 @@ if (localFile.canRead()) {
  * Spring Boot 系列
  */
 def spring_boot = [
-        starter_web: 'org.springframework.boot:spring-boot-starter-web',
-        mybatis    : 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+        base                        : "org.springframework.boot:spring-boot",
+        starter_web                 : 'org.springframework.boot:spring-boot-starter-web',
+        spring_boot_starter_web     : "org.springframework.boot:spring-boot-starter-web",
+        spring_boot_starter_undertow: "org.springframework.boot:spring-boot-starter-undertow",
+        mybatis                     : 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 ]
 
 /**
  * 三方库
  */
 def tools = [
-        flywaydb: 'org.flywaydb:flyway-core'
+        flywaydb        : 'org.flywaydb:flyway-core',
+        commons_codec   : "commons-codec:commons-codec:1.13",
+        commons_io      : "commons-io:commons-io:2.6",
+        commons_compress: "org.apache.commons:commons-compress:1.20",
+        commons_lang    : 'org.apache.commons:commons-lang3:3.11',
+        gson            : "com.google.code.gson:gson:2.8.6",
+        okhttp3         : "com.squareup.okhttp3:okhttp:4.2.0",
+        okhttp3_logging : "com.squareup.okhttp3:logging-interceptor:3.5.0",
+        guava           : "com.google.guava:guava:23.0",
+        mysql_connect   : "mysql:mysql-connector-java:8.0.21",
+]
+
+/**
+ * module
+ */
+def module = [
+        util  : project(":util"),
+        common: project(":common")
 ]
 
 /**
@@ -32,6 +52,7 @@ def test = [
 ext.deps = [
         "spring_boot"    : spring_boot,
         "tools"          : tools,
+        "module"         : module,
         "test"           : test,
         "localProperties": properties
 ]

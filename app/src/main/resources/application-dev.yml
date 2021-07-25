@@ -1,0 +1,7 @@
+## 是否开启定时任务
+scheduler:
+  enable: false
+
+#系统配置
+server:
+  port: 9898

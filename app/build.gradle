@@ -6,6 +6,13 @@ dependencies {
     implementation deps.spring_boot.starter_web
     implementation deps.spring_boot.mybatis
     implementation deps.tools.flywaydb
+    implementation deps.tools.gson
+    implementation deps.tools.okhttp3
+    implementation deps.tools.okhttp3_logging
+    implementation deps.tools.mysql_connect
+
+    implementation deps.module.util
+    implementation deps.module.common
 
     testImplementation deps.test.spring_boot_starter_test
 }

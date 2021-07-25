@@ -1,0 +1,5 @@
+# 数据库配置，使用时 copy 一份，修改为 application-local.yml，正确配置连接数据库
+spring:
+  datasource:
+    username: XXX
+    password: XXX
