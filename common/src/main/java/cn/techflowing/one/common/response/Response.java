@@ -1,4 +1,4 @@
-package cn.techflowing.one.common;
+package cn.techflowing.one.common.response;
 
 /**
  * API 返回体定义
@@ -50,6 +50,24 @@ public class Response<T> {
      */
     public static Response<Object> success() {
         return new Response<>().error(Error.success()).data("");
+    }
+
+    /**
+     * 请求体为空
+     */
+    public static Response<Object> emptyBody() {
+        return new Response<>()
+                .error(Error.of(Feature.COMMON, ErrorCode.PARAMS_ERROR, "请求体为空"))
+                .data("");
+    }
+
+    /**
+     * 请求体为空
+     */
+    public static Response<Object> paramsError(String message) {
+        return new Response<>()
+                .error(Error.of(Feature.COMMON, ErrorCode.PARAMS_ERROR, message))
+                .data("");
     }
 
     /**

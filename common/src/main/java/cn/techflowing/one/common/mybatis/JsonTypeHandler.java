@@ -1,7 +1,7 @@
 package cn.techflowing.one.common.mybatis;
 
-import cn.techfllowing.one.util.GsonUtil;
-import cn.techfllowing.one.util.StringUtil;
+import cn.techflowing.one.util.GsonUtil;
+import cn.techflowing.one.util.StringUtil;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 

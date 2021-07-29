@@ -1,4 +1,4 @@
-package cn.techfllowing.one.util;
+package cn.techflowing.one.util;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;

@@ -1,4 +1,4 @@
-package cn.techfllowing.one.util;
+package cn.techflowing.one.util;
 
 public class LogUtil {
 

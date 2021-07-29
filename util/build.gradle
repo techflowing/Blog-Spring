@@ -2,5 +2,10 @@ dependencies {
     implementation deps.tools.gson
     implementation deps.tools.commons_codec
     implementation deps.tools.commons_io
+    implementation deps.tools.jwt
     implementation deps.spring_boot.base
+    implementation deps.spring_boot.shiro
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.spring_boot_starter_test
 }

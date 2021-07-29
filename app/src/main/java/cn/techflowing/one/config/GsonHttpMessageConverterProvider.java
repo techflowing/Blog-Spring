@@ -1,6 +1,6 @@
 package cn.techflowing.one.config;
 
-import cn.techfllowing.one.util.GsonUtil;
+import cn.techflowing.one.util.GsonUtil;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 

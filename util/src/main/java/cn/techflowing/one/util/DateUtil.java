@@ -1,4 +1,4 @@
-package cn.techfllowing.one.util;
+package cn.techflowing.one.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

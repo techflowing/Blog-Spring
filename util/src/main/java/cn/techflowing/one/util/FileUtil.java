@@ -1,4 +1,4 @@
-package cn.techfllowing.one.util;
+package cn.techflowing.one.util;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;

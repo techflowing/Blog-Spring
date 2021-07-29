@@ -4,8 +4,9 @@ plugins {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
-    jcenter()
+    google()
 }
 
 configurations {
@@ -26,8 +27,9 @@ subprojects {
     sourceCompatibility = '1.8'
 
     repositories {
+        mavenLocal()
         mavenCentral()
-        jcenter()
+        google()
     }
 
     // 解决多模块打包找不到类问题

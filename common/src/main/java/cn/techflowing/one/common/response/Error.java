@@ -1,4 +1,4 @@
-package cn.techflowing.one.common;
+package cn.techflowing.one.common.response;
 
 /**
  * API错误定义
@@ -46,7 +46,7 @@ public class Error {
     public static Error success() {
         return new Error()
                 .feature(0)
-                .error(ErrDef.Error.SUCCESS)
+                .error(ErrorCode.SUCCESS)
                 .message("SUCCESS");
     }
 }

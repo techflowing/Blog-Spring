@@ -12,26 +12,28 @@ if (localFile.canRead()) {
  */
 def spring_boot = [
         base                        : "org.springframework.boot:spring-boot",
-        starter_web                 : 'org.springframework.boot:spring-boot-starter-web',
+        starter_web                 : "org.springframework.boot:spring-boot-starter-web",
         spring_boot_starter_web     : "org.springframework.boot:spring-boot-starter-web",
         spring_boot_starter_undertow: "org.springframework.boot:spring-boot-starter-undertow",
-        mybatis                     : 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+        mybatis                     : "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4",
+        shiro                       : "org.apache.shiro:shiro-spring:1.4.0"
 ]
 
 /**
  * 三方库
  */
 def tools = [
-        flywaydb        : 'org.flywaydb:flyway-core',
+        flywaydb        : "org.flywaydb:flyway-core",
         commons_codec   : "commons-codec:commons-codec:1.13",
         commons_io      : "commons-io:commons-io:2.6",
         commons_compress: "org.apache.commons:commons-compress:1.20",
-        commons_lang    : 'org.apache.commons:commons-lang3:3.11',
+        commons_lang    : "org.apache.commons:commons-lang3:3.11",
         gson            : "com.google.code.gson:gson:2.8.6",
         okhttp3         : "com.squareup.okhttp3:okhttp:4.2.0",
         okhttp3_logging : "com.squareup.okhttp3:logging-interceptor:3.5.0",
         guava           : "com.google.guava:guava:23.0",
         mysql_connect   : "mysql:mysql-connector-java:8.0.21",
+        jwt             : "com.auth0:java-jwt:3.8.0"
 ]
 
 /**
@@ -39,14 +41,16 @@ def tools = [
  */
 def module = [
         util  : project(":util"),
-        common: project(":common")
+        common: project(":common"),
+        blog  : project(":blog")
 ]
 
 /**
  * 测试
  */
 def test = [
-        spring_boot_starter_test: 'org.springframework.boot:spring-boot-starter-test'
+        spring_boot_starter_test: "org.springframework.boot:spring-boot-starter-test",
+        junit                   : "junit:junit:4.13.1"
 ]
 
 ext.deps = [

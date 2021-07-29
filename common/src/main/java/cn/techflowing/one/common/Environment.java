@@ -1,6 +1,6 @@
 package cn.techflowing.one.common;
 
-import cn.techfllowing.one.util.StringUtil;
+import cn.techflowing.one.util.StringUtil;
 import org.springframework.beans.factory.annotation.Value;
 
 /**

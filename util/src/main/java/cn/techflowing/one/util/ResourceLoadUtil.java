@@ -1,4 +1,4 @@
-package cn.techfllowing.one.util;
+package cn.techflowing.one.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;

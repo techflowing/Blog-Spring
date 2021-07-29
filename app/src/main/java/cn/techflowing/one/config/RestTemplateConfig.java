@@ -1,6 +1,6 @@
 package cn.techflowing.one.config;
 
-import cn.techfllowing.one.util.LogUtil;
+import cn.techflowing.one.util.LogUtil;
 import cn.techflowing.one.common.Environment;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
