@@ -1,6 +1,7 @@
 dependencies {
     implementation deps.spring_boot.starter_web
     implementation deps.spring_boot.mybatis
+    implementation deps.tools.gson
     implementation deps.module.common
     implementation deps.module.util
 }

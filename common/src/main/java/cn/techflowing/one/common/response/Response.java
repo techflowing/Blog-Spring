@@ -62,7 +62,16 @@ public class Response<T> {
     }
 
     /**
-     * 请求体为空
+     * 数据存储异常
+     */
+    public static Response<Object> dbError() {
+        return new Response<>()
+                .error(Error.of(Feature.COMMON, ErrorCode.DB_ERROR, "数据存储异常"))
+                .data("");
+    }
+
+    /**
+     * 参数错误
      */
     public static Response<Object> paramsError(String message) {
         return new Response<>()

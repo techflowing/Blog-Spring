@@ -23,6 +23,8 @@ public interface ErrorCode {
     int FILE_NOT_EXIST = 5;
     /** IO异常 */
     int IO_ERROR = 6;
+    /** 结果为空 */
+    int RESULT_EMPTY = 7;
 
     /** 用户不存在 */
     int USER_NOT_EXIST = 101;
