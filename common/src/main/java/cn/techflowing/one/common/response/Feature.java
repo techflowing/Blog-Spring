@@ -19,5 +19,7 @@ public interface Feature {
     interface Blog {
         /** 用户相关 */
         int USER = 1100;
+        /** Token */
+        int TOKEN = 1101;
     }
 }

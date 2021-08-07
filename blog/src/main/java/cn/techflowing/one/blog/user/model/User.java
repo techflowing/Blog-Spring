@@ -18,6 +18,7 @@ public class User extends BaseModel {
     private String mobile;
     private String email;
     private String avatar;
+    private boolean isAdmin;
     private transient int roleLevel;
     private String roleDesc;
     private transient Date createTime;
@@ -68,6 +69,7 @@ public class User extends BaseModel {
 
     public void setRoleLevel(int roleLevel) {
         this.roleLevel = roleLevel;
+        this.isAdmin = Role.isAdmin(roleLevel);
     }
 
     public String getRoleDesc() {
@@ -84,5 +86,13 @@ public class User extends BaseModel {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

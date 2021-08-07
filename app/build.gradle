@@ -5,6 +5,7 @@ bootJar {
 dependencies {
     implementation deps.spring_boot.starter_web
     implementation deps.spring_boot.mybatis
+    implementation deps.spring_boot.shiro
     implementation deps.tools.flywaydb
     implementation deps.tools.gson
     implementation deps.tools.okhttp3

@@ -25,6 +25,10 @@ public interface ErrorCode {
     int IO_ERROR = 6;
     /** 结果为空 */
     int RESULT_EMPTY = 7;
+    /** Token 过期 */
+    int TOKEN_EXPIRED = 8;
+    /** Token 验证失败 */
+    int TOKEN_VERIFY_FAIL = 9;
 
     /** 用户不存在 */
     int USER_NOT_EXIST = 101;
