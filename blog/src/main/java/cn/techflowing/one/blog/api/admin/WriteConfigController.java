@@ -1,4 +1,4 @@
-package cn.techflowing.one.blog.api;
+package cn.techflowing.one.blog.api.admin;
 
 import cn.techflowing.one.blog.config.ConfigService;
 import cn.techflowing.one.common.response.Response;
