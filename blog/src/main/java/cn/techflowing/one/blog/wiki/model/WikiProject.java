@@ -14,6 +14,7 @@ public class WikiProject extends BaseModel {
     private String description;
     private int docCount;
     private String thumb;
+    private String hashKey;
 
     public String getName() {
         return name;
@@ -45,5 +46,13 @@ public class WikiProject extends BaseModel {
 
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    public String getHashKey() {
+        return hashKey;
+    }
+
+    public void setHashKey(String hashKey) {
+        this.hashKey = hashKey;
     }
 }

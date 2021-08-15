@@ -5,7 +5,7 @@ create table blog_config
     content     json comment '配置项内容，只支持JSON格式',
     `desc`      varchar(255) default '' null comment '配置项描述',
     create_time timestamp    default current_timestamp not null,
-    update_time timestamp    default current_timestamp not null,
+    update_time timestamp    default current_timestamp not null on update current_timestamp,
     constraint uniq_name
         unique (name)
 ) engine = InnoDB

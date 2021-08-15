@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2021/8/8 10:23 下午
  */
 @RestController
-@RequestMapping("/blog/v1/wiki/project")
+@RequestMapping("/blog/v1/wiki/project/")
 public class WikiProjectController {
 
     @Autowired

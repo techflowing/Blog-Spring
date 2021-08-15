@@ -8,7 +8,7 @@ create table blog_user_info
     avatar      varchar(512) default '' null comment '头像地址',
     role        int          default 0                 not null comment '角色，角色表ID',
     create_time timestamp    default current_timestamp not null,
-    update_time timestamp    default current_timestamp not null,
+    update_time timestamp    default current_timestamp not null on update current_timestamp,
     constraint uniq_username
         unique (username)
 ) engine = InnoDB

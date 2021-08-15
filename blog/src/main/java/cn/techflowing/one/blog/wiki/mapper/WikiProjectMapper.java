@@ -18,6 +18,6 @@ public interface WikiProjectMapper {
 
     String TABLE_NAME = "blog_wiki_project";
 
-    @Select("select name, description, doc_count, thumb from " + TABLE_NAME + " order by update_time desc")
+    @Select("select name, description, doc_count, thumb, hash_key from " + TABLE_NAME + " order by update_time desc")
     List<WikiProject> queryAllWikiProject();
 }
