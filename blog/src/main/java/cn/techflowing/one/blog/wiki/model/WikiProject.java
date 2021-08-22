@@ -2,6 +2,8 @@ package cn.techflowing.one.blog.wiki.model;
 
 import cn.techflowing.one.common.BaseModel;
 
+import java.util.Date;
+
 /**
  * Wiki 项目
  *
@@ -10,11 +12,14 @@ import cn.techflowing.one.common.BaseModel;
  * @since 2021/8/8 10:10 下午
  */
 public class WikiProject extends BaseModel {
+
     private String name;
     private String description;
     private int docCount;
     private String thumb;
     private String hashKey;
+    private Date createTime;
+    private Date updateTime;
 
     public String getName() {
         return name;
@@ -54,5 +59,21 @@ public class WikiProject extends BaseModel {
 
     public void setHashKey(String hashKey) {
         this.hashKey = hashKey;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

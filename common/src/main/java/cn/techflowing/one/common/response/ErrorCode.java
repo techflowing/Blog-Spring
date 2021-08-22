@@ -31,6 +31,10 @@ public interface ErrorCode {
     int TOKEN_VERIFY_FAIL = 9;
     /** Token 为空 */
     int TOKEN_EMPTY = 10;
+    /** Exception 异常 */
+    int EXCEPTION = 11;
+    /** 文件上传失败 */
+    int FILE_UPLOAD_FAIL = 12;
 
     /** 用户不存在 */
     int USER_NOT_EXIST = 101;

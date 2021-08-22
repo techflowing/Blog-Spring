@@ -71,6 +71,15 @@ public class Response<T> {
     }
 
     /**
+     * 异常
+     */
+    public static Response<Object> error(String msg) {
+        return new Response<>()
+                .error(Error.of(Feature.COMMON, ErrorCode.EXCEPTION, msg))
+                .data("");
+    }
+
+    /**
      * 参数错误
      */
     public static Response<Object> paramsError(String message) {

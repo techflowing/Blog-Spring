@@ -3,4 +3,5 @@ include 'app'
 include 'blog'
 include 'util'
 include 'common'
+include 'ali-oss'
 

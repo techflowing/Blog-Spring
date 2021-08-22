@@ -21,5 +21,7 @@ public interface Feature {
         int USER = 1100;
         /** Token */
         int TOKEN = 1101;
+        /** OSS */
+        int OSS = 1102;
     }
 }

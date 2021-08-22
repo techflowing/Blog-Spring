@@ -33,16 +33,18 @@ def tools = [
         okhttp3_logging : "com.squareup.okhttp3:logging-interceptor:3.5.0",
         guava           : "com.google.guava:guava:23.0",
         mysql_connect   : "mysql:mysql-connector-java:8.0.21",
-        jwt             : "com.auth0:java-jwt:3.8.0"
+        jwt             : "com.auth0:java-jwt:3.8.0",
+        ali_oss         : "com.aliyun.oss:aliyun-sdk-oss:3.13.0"
 ]
 
 /**
  * module
  */
 def module = [
-        util  : project(":util"),
-        common: project(":common"),
-        blog  : project(":blog")
+        util   : project(":util"),
+        ali_oss: project(":ali-oss"),
+        common : project(":common"),
+        blog   : project(":blog")
 ]
 
 /**

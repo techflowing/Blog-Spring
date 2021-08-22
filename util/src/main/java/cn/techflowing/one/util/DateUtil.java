@@ -7,6 +7,16 @@ import java.util.Date;
 public class DateUtil {
 
     /**
+     * 格式化毫秒时间戳到日期 格式 yyyyMM
+     *
+     * @return 日期，格式 yyyyMM
+     */
+    public static String formatTimeToMonthDay(long timestamp) {
+        Date date = new Date(timestamp);
+        return new SimpleDateFormat("yyyyMM").format(date);
+    }
+
+    /**
      * 格式化毫秒时间戳到日期 格式 yyyy-MM-dd
      *
      * @return 日期，格式 yyyy-MM-dd

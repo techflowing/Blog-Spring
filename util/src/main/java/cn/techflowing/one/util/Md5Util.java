@@ -17,6 +17,15 @@ public class Md5Util {
     public static final String ALGORITHM_NAME = "MD5";
 
     /**
+     * 获取MD5 值
+     *
+     * @param source 源
+     */
+    public static String getMd5(Object source) {
+        return new SimpleHash(ALGORITHM_NAME, source).toString();
+    }
+
+    /**
      * 获取重复hash 结果，hash 1024 次
      *
      * @param content 内筒
