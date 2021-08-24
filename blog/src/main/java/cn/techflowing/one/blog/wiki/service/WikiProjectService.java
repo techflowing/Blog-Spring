@@ -25,6 +25,10 @@ public class WikiProjectService {
         return wikiProjectMapper.queryAllWikiProject();
     }
 
+    public WikiProject queryWikiProject(String hashKey) {
+        return wikiProjectMapper.queryWikiProject(hashKey);
+    }
+
     public boolean createWikiProject(String name, String desc, String thumb) {
         String hashKey = Md5Util.getMd5(name + System.currentTimeMillis());
         return wikiProjectMapper.createWikiProject(name, desc, thumb, hashKey) > 0;

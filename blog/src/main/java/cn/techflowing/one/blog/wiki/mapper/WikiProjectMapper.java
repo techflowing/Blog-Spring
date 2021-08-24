@@ -20,6 +20,12 @@ public interface WikiProjectMapper {
     @Select("select * from " + TABLE_NAME + " order by update_time desc")
     List<WikiProject> queryAllWikiProject();
 
+    @Select("select * from " + TABLE_NAME + " where hash_key = #{key} limit 1")
+    WikiProject queryWikiProject(String key);
+
+    @Select("select id from " + TABLE_NAME + " where hash_key = #{key} limit 1")
+    int queryWikiProjectId(String key);
+
     @Insert("insert into " + TABLE_NAME + "(name, description, thumb, hash_key) values (" +
             "#{name}, #{description}, #{thumb}, #{hashKey})")
     int createWikiProject(String name, String description, String thumb, String hashKey);

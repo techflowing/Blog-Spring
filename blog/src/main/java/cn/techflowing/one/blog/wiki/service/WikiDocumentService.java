@@ -1,7 +1,10 @@
 package cn.techflowing.one.blog.wiki.service;
 
 import cn.techflowing.one.blog.wiki.mapper.WikiDocumentMapper;
+import cn.techflowing.one.blog.wiki.mapper.WikiProjectMapper;
+import cn.techflowing.one.blog.wiki.model.CreateDocumentBody;
 import cn.techflowing.one.blog.wiki.model.WikiDocument;
+import cn.techflowing.one.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class WikiDocumentService {
 
     @Autowired
     WikiDocumentMapper documentMapper;
+    @Autowired
+    WikiProjectMapper projectMapper;
 
     /**
      * 构建文档树
@@ -57,5 +62,21 @@ public class WikiDocumentService {
      */
     public String queryContentByHashKey(String hashKey) {
         return documentMapper.queryContentByHashKey(hashKey);
+    }
+
+    /**
+     * 创建新文档
+     */
+    public boolean createDocument(CreateDocumentBody body) {
+        int projectId = projectMapper.queryWikiProjectId(body.getProjectKey());
+        if (projectId <= 0) {
+            return false;
+        }
+        String hashKey = Md5Util.getMd5(body.getName() + System.currentTimeMillis() + new Random().nextInt());
+        return documentMapper.createNewDocument(projectId,
+                body.getName(),
+                body.getDir() ? WikiDocument.TYPE_DIR : WikiDocument.TYPE_DOC,
+                body.getParentId(),
+                hashKey) > 0;
     }
 }

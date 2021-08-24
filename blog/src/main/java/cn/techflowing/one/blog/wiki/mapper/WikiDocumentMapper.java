@@ -1,6 +1,7 @@
 package cn.techflowing.one.blog.wiki.mapper;
 
 import cn.techflowing.one.blog.wiki.model.WikiDocument;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -26,4 +27,8 @@ public interface WikiDocumentMapper {
 
     @Select("select content from " + TABLE_NAME + " where hash_key = #{key} limit 1;")
     String queryContentByHashKey(String key);
+
+    @Insert("insert into " + TABLE_NAME + "( project_id, name, type, parent_id, hash_key) values (" +
+            "#{projectId}, #{name}, #{type}, #{parentId}, #{hashKey})")
+    int createNewDocument(int projectId, String name, int type, int parentId, String hashKey);
 }

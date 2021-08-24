@@ -6,6 +6,7 @@ import cn.techflowing.one.common.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,5 +29,11 @@ public class WikiProjectController {
     public Response<Object> queryWikiProjectList() {
         List<WikiProject> list = wikiProjectService.queryAllWikiProject();
         return Response.success(list);
+    }
+
+    @GetMapping("item")
+    public Response<Object> queryWikiProjectList(@RequestParam(value = "projectKey") String key) {
+        WikiProject project = wikiProjectService.queryWikiProject(key);
+        return Response.success(project);
     }
 }

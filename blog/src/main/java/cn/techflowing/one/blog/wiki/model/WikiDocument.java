@@ -18,9 +18,9 @@ public class WikiDocument extends BaseModel {
     public static final int TYPE_DOC = 0;
     public static final int TYPE_DIR = 1;
 
-    private transient int id;
+    private int id;
     private transient int type;
-    private transient int parentId;
+    private int parentId;
     private transient int sort;
     @SerializedName("title")
     private String name;
