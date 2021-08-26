@@ -3,11 +3,14 @@ package cn.techflowing.one.blog.wiki.service;
 import cn.techflowing.one.blog.wiki.mapper.WikiDocumentMapper;
 import cn.techflowing.one.blog.wiki.mapper.WikiProjectMapper;
 import cn.techflowing.one.blog.wiki.model.CreateDocumentBody;
+import cn.techflowing.one.blog.wiki.model.DeleteDocumentBody;
 import cn.techflowing.one.blog.wiki.model.RenameDocumentBody;
 import cn.techflowing.one.blog.wiki.model.WikiDocument;
+import cn.techflowing.one.common.mybatis.DbErrorException;
 import cn.techflowing.one.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -68,6 +71,7 @@ public class WikiDocumentService {
     /**
      * 创建新文档
      */
+    @Transactional
     public boolean createDocument(CreateDocumentBody body) {
         int projectId = projectMapper.queryWikiProjectId(body.getProjectKey());
         if (projectId <= 0) {
@@ -84,7 +88,10 @@ public class WikiDocumentService {
             return false;
         }
         // 更新文档总数
-        projectMapper.updateDocCount(projectId);
+        int update = projectMapper.updateDocCount(projectId);
+        if (update <= 0) {
+            throw new DbErrorException();
+        }
         return true;
     }
 
@@ -93,5 +100,28 @@ public class WikiDocumentService {
      */
     public boolean renameDocument(RenameDocumentBody body) {
         return documentMapper.renameDocument(body.getName(), body.getDocumentId()) > 0;
+    }
+
+    /**
+     * 删除文档
+     *
+     * @param body 数据
+     * @return
+     */
+    @Transactional
+    public boolean deleteDocument(DeleteDocumentBody body) {
+        int id = projectMapper.queryWikiProjectId(body.getProjectKey());
+        if (id <= 0) {
+            return false;
+        }
+        int deleteCount = documentMapper.deleteDocument(body.getDocumentId());
+        if (deleteCount <= 0) {
+            return false;
+        }
+        int update = projectMapper.updateDocCount(id);
+        if (update <= 0) {
+            throw new DbErrorException();
+        }
+        return true;
     }
 }

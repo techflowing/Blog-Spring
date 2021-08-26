@@ -1,10 +1,7 @@
 package cn.techflowing.one.blog.wiki.mapper;
 
 import cn.techflowing.one.blog.wiki.model.WikiDocument;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -35,4 +32,10 @@ public interface WikiDocumentMapper {
 
     @Update("update " + TABLE_NAME + " set name = #{name} where id = #{documentId}")
     int renameDocument(String name, int documentId);
+
+    @Delete("delete from blog_wiki_document where project_id = #{projectId}")
+    int deleteAllDocument(int projectId);
+
+    @DeleteProvider(type = MapperProvider.class, method = "deleteDocument")
+    int deleteDocument(List<Integer> list);
 }

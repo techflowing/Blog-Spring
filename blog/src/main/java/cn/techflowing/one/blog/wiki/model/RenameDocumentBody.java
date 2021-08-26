@@ -1,5 +1,6 @@
 package cn.techflowing.one.blog.wiki.model;
 
+import cn.techflowing.one.common.BaseModel;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -9,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * @version 1.0.0
  * @since 2021/8/25 1:14 上午
  */
-public class RenameDocumentBody {
+public class RenameDocumentBody extends BaseModel {
 
     @SerializedName("name")
     private String name;

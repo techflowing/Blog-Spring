@@ -1,5 +1,6 @@
 package cn.techflowing.one.blog.wiki.service;
 
+import cn.techflowing.one.blog.wiki.mapper.WikiDocumentMapper;
 import cn.techflowing.one.blog.wiki.mapper.WikiProjectMapper;
 import cn.techflowing.one.blog.wiki.model.WikiProject;
 import cn.techflowing.one.util.Md5Util;
@@ -20,6 +21,8 @@ public class WikiProjectService {
 
     @Autowired
     WikiProjectMapper wikiProjectMapper;
+    @Autowired
+    WikiDocumentMapper wikiDocumentMapper;
 
     public List<WikiProject> queryAllWikiProject() {
         return wikiProjectMapper.queryAllWikiProject();
@@ -35,7 +38,17 @@ public class WikiProjectService {
     }
 
     public boolean deleteWikiProject(String hashKey) {
-        return wikiProjectMapper.deleteWikiProject(hashKey) > 0;
+        int id = wikiProjectMapper.queryWikiProjectId(hashKey);
+        if (id <= 0) {
+            return false;
+        }
+        int result = wikiProjectMapper.deleteWikiProject(hashKey);
+        if (result <= 0) {
+            return false;
+        }
+        // 删除文档，忽略结果
+        wikiDocumentMapper.deleteAllDocument(id);
+        return true;
     }
 
     public boolean updateWikiProject(WikiProject project) {
