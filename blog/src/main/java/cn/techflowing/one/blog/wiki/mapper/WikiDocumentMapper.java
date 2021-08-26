@@ -4,6 +4,7 @@ import cn.techflowing.one.blog.wiki.model.WikiDocument;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -28,7 +29,10 @@ public interface WikiDocumentMapper {
     @Select("select content from " + TABLE_NAME + " where hash_key = #{key} limit 1;")
     String queryContentByHashKey(String key);
 
-    @Insert("insert into " + TABLE_NAME + "( project_id, name, type, parent_id, hash_key) values (" +
-            "#{projectId}, #{name}, #{type}, #{parentId}, #{hashKey})")
-    int createNewDocument(int projectId, String name, int type, int parentId, String hashKey);
+    @Insert("insert into " + TABLE_NAME + "( project_id, name, type, parent_id, sort, hash_key) values (" +
+            "#{projectId}, #{name}, #{type}, #{parentId}, #{sort}, #{hashKey})")
+    int createNewDocument(int projectId, String name, int type, int parentId, int sort, String hashKey);
+
+    @Update("update " + TABLE_NAME + " set name = #{name} where id = #{documentId}")
+    int renameDocument(String name, int documentId);
 }

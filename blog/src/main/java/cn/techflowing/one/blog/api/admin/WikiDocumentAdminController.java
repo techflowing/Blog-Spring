@@ -1,6 +1,7 @@
 package cn.techflowing.one.blog.api.admin;
 
 import cn.techflowing.one.blog.wiki.model.CreateDocumentBody;
+import cn.techflowing.one.blog.wiki.model.RenameDocumentBody;
 import cn.techflowing.one.blog.wiki.model.WikiDocument;
 import cn.techflowing.one.blog.wiki.service.WikiDocumentService;
 import cn.techflowing.one.common.response.Response;
@@ -42,4 +43,15 @@ public class WikiDocumentAdminController {
         return result ? Response.success() : Response.dbError();
     }
 
+    @PostMapping("rename")
+    public Response<Object> renameDocument(@RequestBody RenameDocumentBody body) {
+        if (body == null) {
+            return Response.emptyBody();
+        }
+        if (StringUtil.isEmpty(body.getName()) || body.getDocumentId() <= 0) {
+            return Response.paramsError("参数缺失");
+        }
+        boolean result = wikiDocumentService.renameDocument(body);
+        return result ? Response.success() : Response.dbError();
+    }
 }

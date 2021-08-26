@@ -1,5 +1,6 @@
 package cn.techflowing.one.blog.wiki.mapper;
 
+import cn.techflowing.one.blog.wiki.model.WikiDocument;
 import cn.techflowing.one.blog.wiki.model.WikiProject;
 import org.apache.ibatis.annotations.*;
 
@@ -36,4 +37,10 @@ public interface WikiProjectMapper {
     @Update("update " + TABLE_NAME + " set name = #{name},description = #{description} ,thumb = #{thumb} " +
             "where hash_key = #{hashKey} limit  1")
     int updateWikiProject(String name, String description, String thumb, String hashKey);
+
+    @Update("update " + TABLE_NAME + " set doc_count = " +
+            "(select count(*) from " + WikiDocumentMapper.TABLE_NAME +
+            " where project_id = #{projectId} and type = " + WikiDocument.TYPE_DOC + ") " +
+            "where id = #{projectId}")
+    int updateDocCount(int projectId);
 }

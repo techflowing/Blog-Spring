@@ -3,6 +3,7 @@ package cn.techflowing.one.blog.wiki.service;
 import cn.techflowing.one.blog.wiki.mapper.WikiDocumentMapper;
 import cn.techflowing.one.blog.wiki.mapper.WikiProjectMapper;
 import cn.techflowing.one.blog.wiki.model.CreateDocumentBody;
+import cn.techflowing.one.blog.wiki.model.RenameDocumentBody;
 import cn.techflowing.one.blog.wiki.model.WikiDocument;
 import cn.techflowing.one.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,10 +74,24 @@ public class WikiDocumentService {
             return false;
         }
         String hashKey = Md5Util.getMd5(body.getName() + System.currentTimeMillis() + new Random().nextInt());
-        return documentMapper.createNewDocument(projectId,
+        int result = documentMapper.createNewDocument(projectId,
                 body.getName(),
                 body.getDir() ? WikiDocument.TYPE_DIR : WikiDocument.TYPE_DOC,
                 body.getParentId(),
-                hashKey) > 0;
+                Integer.MAX_VALUE,
+                hashKey);
+        if (result <= 0) {
+            return false;
+        }
+        // 更新文档总数
+        projectMapper.updateDocCount(projectId);
+        return true;
+    }
+
+    /**
+     * 重命名文档
+     */
+    public boolean renameDocument(RenameDocumentBody body) {
+        return documentMapper.renameDocument(body.getName(), body.getDocumentId()) > 0;
     }
 }
