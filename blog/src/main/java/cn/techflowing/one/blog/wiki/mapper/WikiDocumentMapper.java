@@ -33,9 +33,15 @@ public interface WikiDocumentMapper {
     @Update("update " + TABLE_NAME + " set name = #{name} where id = #{documentId}")
     int renameDocument(String name, int documentId);
 
-    @Delete("delete from blog_wiki_document where project_id = #{projectId}")
+    @Delete("delete from " + TABLE_NAME + " where project_id = #{projectId}")
     int deleteAllDocument(int projectId);
 
     @DeleteProvider(type = MapperProvider.class, method = "deleteDocument")
     int deleteDocument(List<Integer> list);
+
+    @Select("select id from " + TABLE_NAME + " where project_id = #{projectId} and parent_id = #{docId} order by sort")
+    List<Integer> queryChildDocument(int projectId, int docId);
+
+    @UpdateProvider(type = MapperProvider.class, method = "updateDocumentSort")
+    int updateDocSort(List<Integer> list, int parentId);
 }

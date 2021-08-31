@@ -1,9 +1,6 @@
 package cn.techflowing.one.blog.api.admin;
 
-import cn.techflowing.one.blog.wiki.model.CreateDocumentBody;
-import cn.techflowing.one.blog.wiki.model.DeleteDocumentBody;
-import cn.techflowing.one.blog.wiki.model.RenameDocumentBody;
-import cn.techflowing.one.blog.wiki.model.WikiDocument;
+import cn.techflowing.one.blog.wiki.model.*;
 import cn.techflowing.one.blog.wiki.service.WikiDocumentService;
 import cn.techflowing.one.common.mybatis.DbErrorException;
 import cn.techflowing.one.common.response.Response;
@@ -76,4 +73,16 @@ public class WikiDocumentAdminController {
             return Response.dbError();
         }
     }
+
+    @PostMapping("drag")
+    public Response<Object> renameDocument(@RequestBody DragDocumentBody body) {
+        if (body == null) {
+            return Response.emptyBody();
+        }
+        if (StringUtil.isEmpty(body.getProjectKey())) {
+            return Response.paramsError("ProjectKey 参数缺失");
+        }
+        return wikiDocumentService.dragDocument(body) ? Response.success() : Response.dbError();
+    }
 }
+

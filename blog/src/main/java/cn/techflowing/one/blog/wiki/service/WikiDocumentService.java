@@ -2,10 +2,7 @@ package cn.techflowing.one.blog.wiki.service;
 
 import cn.techflowing.one.blog.wiki.mapper.WikiDocumentMapper;
 import cn.techflowing.one.blog.wiki.mapper.WikiProjectMapper;
-import cn.techflowing.one.blog.wiki.model.CreateDocumentBody;
-import cn.techflowing.one.blog.wiki.model.DeleteDocumentBody;
-import cn.techflowing.one.blog.wiki.model.RenameDocumentBody;
-import cn.techflowing.one.blog.wiki.model.WikiDocument;
+import cn.techflowing.one.blog.wiki.model.*;
 import cn.techflowing.one.common.mybatis.DbErrorException;
 import cn.techflowing.one.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Wiki 文档
@@ -123,5 +121,46 @@ public class WikiDocumentService {
             throw new DbErrorException();
         }
         return true;
+    }
+
+    /**
+     * 拖动文档排序
+     *
+     * @param body 信息
+     */
+    @Transactional
+    public boolean dragDocument(DragDocumentBody body) {
+        int projectId = projectMapper.queryWikiProjectId(body.getProjectKey());
+        if (projectId <= 0) {
+            return false;
+        }
+        if (body.isDragOver()) { // 拖动到文件夹内，直接放到第一位
+            List<Integer> childDocId = documentMapper.queryChildDocument(projectId, body.getTargetNode().getId());
+            removeId(childDocId, body.getDragNode().getId());
+            childDocId.add(0, body.getDragNode().getId());
+            return documentMapper.updateDocSort(childDocId, body.getTargetNode().getId()) > 0;
+        } else if (body.isDragOverGapTop()) { // 拖动到节点上部
+            List<Integer> childDocId = documentMapper.queryChildDocument(projectId, body.getTargetNode().getParentId());
+            removeId(childDocId, body.getDragNode().getId());
+            childDocId.add(childDocId.indexOf(body.getTargetNode().getId()), body.getDragNode().getId());
+            return documentMapper.updateDocSort(childDocId, body.getTargetNode().getParentId()) > 0;
+        } else if (body.isDragOverGapBottom()) { // 拖动到节点下部
+            List<Integer> childDocId = documentMapper.queryChildDocument(projectId, body.getTargetNode().getParentId());
+            removeId(childDocId, body.getDragNode().getId());
+            childDocId.add(childDocId.indexOf(body.getTargetNode().getId()) + 1, body.getDragNode().getId());
+            return documentMapper.updateDocSort(childDocId, body.getTargetNode().getParentId()) > 0;
+        } else { // 拖动到文件夹内，放到最后一位，有点不确定这个情景！！！
+            List<Integer> childDocId = documentMapper.queryChildDocument(projectId, body.getTargetNode().getId());
+            removeId(childDocId, body.getDragNode().getId());
+            childDocId.add(body.getDragNode().getId());
+            return documentMapper.updateDocSort(childDocId, body.getTargetNode().getId()) > 0;
+        }
+    }
+
+    /**
+     * 移除ID
+     */
+    private void removeId(List<Integer> list, int id) {
+        list.removeIf(integer -> integer == id);
     }
 }

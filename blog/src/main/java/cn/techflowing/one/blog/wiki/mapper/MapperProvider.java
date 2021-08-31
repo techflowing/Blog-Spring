@@ -2,6 +2,7 @@ package cn.techflowing.one.blog.wiki.mapper;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 动态SQL
@@ -23,6 +24,21 @@ public class MapperProvider {
             }
         }
         sb.append(")");
+        return sb.toString();
+    }
+
+    public String updateDocumentSort(List<Integer> list, int parentId) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("update " + WikiDocumentMapper.TABLE_NAME + " set sort = case id ");
+        for (int i = 0; i < list.size(); i++) {
+            sb.append("when ").append(list.get(i)).append(" then ").append(i).append(" ");
+        }
+        sb.append("end, parent_id = ")
+                .append(parentId)
+                .append(" ")
+                .append("where id in (")
+                .append(list.stream().map(String::valueOf).collect(Collectors.joining(",")))
+                .append(")");
         return sb.toString();
     }
 }
