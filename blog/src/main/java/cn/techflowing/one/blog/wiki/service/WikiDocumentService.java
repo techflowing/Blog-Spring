@@ -94,6 +94,13 @@ public class WikiDocumentService {
     }
 
     /**
+     * 更新文档内容
+     */
+    public boolean updateDocumentContent(UpdateDocumentBody body) {
+        return documentMapper.updateDocumentContent(body.getContent(), body.getHashKey()) > 0;
+    }
+
+    /**
      * 重命名文档
      */
     public boolean renameDocument(RenameDocumentBody body) {

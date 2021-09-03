@@ -33,6 +33,9 @@ public interface WikiDocumentMapper {
     @Update("update " + TABLE_NAME + " set name = #{name} where id = #{documentId}")
     int renameDocument(String name, int documentId);
 
+    @Update("update " + TABLE_NAME + " set content = #{content} where hash_key = #{hashKey}")
+    int updateDocumentContent(String content, String hashKey);
+
     @Delete("delete from " + TABLE_NAME + " where project_id = #{projectId}")
     int deleteAllDocument(int projectId);
 

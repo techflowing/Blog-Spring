@@ -84,5 +84,16 @@ public class WikiDocumentAdminController {
         }
         return wikiDocumentService.dragDocument(body) ? Response.success() : Response.dbError();
     }
+
+    @PostMapping("update")
+    public Response<Object> renameDocument(@RequestBody UpdateDocumentBody body) {
+        if (body == null) {
+            return Response.emptyBody();
+        }
+        if (StringUtil.isEmpty(body.getHashKey())) {
+            return Response.paramsError("HashKey 参数缺失");
+        }
+        return wikiDocumentService.updateDocumentContent(body) ? Response.success() : Response.dbError();
+    }
 }
 
