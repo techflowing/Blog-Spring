@@ -34,7 +34,8 @@ def tools = [
         guava           : "com.google.guava:guava:23.0",
         mysql_connect   : "mysql:mysql-connector-java:8.0.21",
         jwt             : "com.auth0:java-jwt:3.8.0",
-        ali_oss         : "com.aliyun.oss:aliyun-sdk-oss:3.13.0"
+        ali_oss         : "com.aliyun.oss:aliyun-sdk-oss:3.13.0",
+        xmind           : "com.github.eljah:xmindjbehaveplugin:0.8"
 ]
 
 /**

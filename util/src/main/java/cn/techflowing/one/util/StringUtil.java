@@ -1,5 +1,7 @@
 package cn.techflowing.one.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -108,5 +110,14 @@ public class StringUtil {
     public static String substringAfterLast(String source, String target) {
         int index = source.lastIndexOf(target);
         return index == -1 ? source : source.substring(index + target.length());
+    }
+
+    public static String encodeURL(String content) {
+        try {
+            return URLEncoder.encode(content, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return content;
     }
 }

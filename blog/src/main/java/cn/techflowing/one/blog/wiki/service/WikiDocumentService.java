@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * Wiki 文档
@@ -52,7 +51,7 @@ public class WikiDocumentService {
                 treeList.add(item);
             }
         });
-        // 跟目录排序
+        // 根目录排序
         treeList.sort(Comparator.comparingInt(WikiDocument::getSort));
         return treeList;
     }

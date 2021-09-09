@@ -23,5 +23,7 @@ public interface Feature {
         int TOKEN = 1101;
         /** OSS */
         int OSS = 1102;
+        /** XMind */
+        int XMIND = 1103;
     }
 }

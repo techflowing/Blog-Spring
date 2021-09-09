@@ -35,6 +35,8 @@ public interface ErrorCode {
     int EXCEPTION = 11;
     /** 文件上传失败 */
     int FILE_UPLOAD_FAIL = 12;
+    /** 逻辑错误 */
+    int LOGIC_ERROR = 13;
 
     /** 用户不存在 */
     int USER_NOT_EXIST = 101;
