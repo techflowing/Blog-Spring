@@ -11,12 +11,11 @@ if (localFile.canRead()) {
  * Spring Boot 系列
  */
 def spring_boot = [
-        base                        : "org.springframework.boot:spring-boot",
-        starter_web                 : "org.springframework.boot:spring-boot-starter-web",
-        spring_boot_starter_web     : "org.springframework.boot:spring-boot-starter-web",
-        spring_boot_starter_undertow: "org.springframework.boot:spring-boot-starter-undertow",
-        mybatis                     : "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4",
-        shiro                       : "org.apache.shiro:shiro-spring:1.4.0"
+        base            : "org.springframework.boot:spring-boot:$spring_boot_version",
+        starter_web     : "org.springframework.boot:spring-boot-starter-web:$spring_boot_version",
+        starter_undertow: "org.springframework.boot:spring-boot-starter-undertow:$spring_boot_version",
+        mybatis         : "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4",
+        shiro           : "org.apache.shiro:shiro-spring:1.4.0"
 ]
 
 /**
@@ -35,7 +34,8 @@ def tools = [
         mysql_connect   : "mysql:mysql-connector-java:8.0.21",
         jwt             : "com.auth0:java-jwt:3.8.0",
         ali_oss         : "com.aliyun.oss:aliyun-sdk-oss:3.13.0",
-        xmind           : "com.github.eljah:xmindjbehaveplugin:0.8"
+        xmind           : "com.github.eljah:xmindjbehaveplugin:0.8",
+        ua_util         : "eu.bitwalker:UserAgentUtils:1.21"
 ]
 
 /**

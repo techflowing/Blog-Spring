@@ -2,6 +2,7 @@ dependencies {
     implementation deps.spring_boot.starter_web
     implementation deps.spring_boot.mybatis
     implementation deps.spring_boot.shiro
+    implementation deps.tools.ua_util
     implementation deps.tools.gson
     implementation deps.tools.xmind
     implementation deps.module.common

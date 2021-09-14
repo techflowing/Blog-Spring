@@ -5,6 +5,7 @@ dependencies {
     implementation deps.tools.jwt
     implementation deps.spring_boot.base
     implementation deps.spring_boot.shiro
+    implementation deps.spring_boot.starter_web
 
     testImplementation deps.test.junit
     testImplementation deps.test.spring_boot_starter_test
