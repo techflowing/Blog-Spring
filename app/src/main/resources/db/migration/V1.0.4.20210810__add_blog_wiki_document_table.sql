@@ -14,16 +14,3 @@ create table blog_wiki_document
         unique (hash_key)
 ) engine = InnoDB
   charset = utf8mb4 comment '博客站知识库文章表';
-
-insert into OneSpring.blog_wiki_document(id, project_id, name, type, parent_id, sort, content, hash_key, create_time, update_time)
-select id,
-       project_id,
-       name,
-       type,
-       parent_id,
-       sort,
-       replace(content,'http://techflowing.cn/media-store/wiki/img/','http://ali-oss.techflowing.cn/media-store/wiki/img/'),
-       md5(concat(name, current_time, rand())),
-       created_at,
-       updated_at
-from Blog.wiki_document;

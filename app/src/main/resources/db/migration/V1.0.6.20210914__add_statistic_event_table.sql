@@ -11,14 +11,3 @@ create table blog_statistic_event
     update_time timestamp default current_timestamp not null on update current_timestamp
 ) engine = InnoDB
   charset = utf8mb4 comment '统计事件细表';
-
-insert into OneSpring.blog_statistic_event(date, name, scene, location, ip, content, create_time, update_time)
-select date,
-    name,
-    scene,
-    location,
-    ip,
-    content,
-    created_at,
-    updated_at
-from Blog.statistic_event;

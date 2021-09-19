@@ -10,7 +10,3 @@ create table blog_statistic_visitor_pv
         unique (scene, location)
 ) engine = InnoDB
   charset = utf8mb4 comment '站点访问PV数';
-
-insert into OneSpring.blog_statistic_visitor_pv(id, scene, location, pv, create_time, update_time)
-select id, scene, location, pv, created_at, updated_at
-from Blog.statistic_pv;

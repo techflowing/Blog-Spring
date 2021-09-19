@@ -14,7 +14,7 @@ spring:
         - local
       prod:
         - prod
-        - local
+        - prod-local
   # flyway 配置
   flyway:
     enabled: true
