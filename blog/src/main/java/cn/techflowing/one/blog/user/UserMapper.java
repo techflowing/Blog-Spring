@@ -3,6 +3,7 @@ package cn.techflowing.one.blog.user;
 import cn.techflowing.one.blog.user.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * 账户相关Mapper
@@ -34,4 +35,7 @@ public interface UserMapper {
             "         join " + USER_ROLE_TABLE + " role\n" +
             "where user.role = role.id")
     User findUserByUsername(String username);
+
+    @Update("update " + USER_INFO_TABLE + " set password = #{password} where username = #{username}")
+    int changePassword(String username, String password);
 }
