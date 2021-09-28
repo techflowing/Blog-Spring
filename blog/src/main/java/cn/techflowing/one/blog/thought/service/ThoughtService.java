@@ -7,9 +7,7 @@ import cn.techflowing.one.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 随想录 Service
@@ -67,6 +65,15 @@ public class ThoughtService {
                 map.put(value, map.getOrDefault(value, 0) + 1);
             });
         });
+        return map;
+    }
+
+    public Map<String, Integer> queryOverview() {
+        Map<String, Integer> tags = queryTags();
+        int count = thoughtMapper.count();
+        Map<String, Integer> map = new HashMap<>();
+        map.put("tags", tags == null ? 0 : tags.size());
+        map.put("count", count);
         return map;
     }
 }

@@ -32,4 +32,9 @@ public class ThoughtController {
     public Response<Object> queryTags() {
         return Response.success(thoughtService.queryTags());
     }
+
+    @GetMapping("overview")
+    public Response<Object> queryOverview() {
+        return Response.success(thoughtService.queryOverview());
+    }
 }
