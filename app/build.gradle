@@ -15,6 +15,8 @@ dependencies {
     implementation deps.module.blog
     implementation deps.module.util
     implementation deps.module.common
+    implementation deps.module.ali_oss
 
+    testImplementation deps.test.junit
     testImplementation deps.test.spring_boot_starter_test
 }

@@ -1,5 +1,6 @@
 package cn.techflowing.one.backup;
 
+import cn.techflowing.one.ali.oss.AliOssClient;
 import cn.techflowing.one.util.DateUtil;
 import cn.techflowing.one.util.FileUtil;
 import cn.techflowing.one.util.LogUtil;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * 数据库备份
@@ -23,7 +26,7 @@ public class MySqlBackUp {
 
     private static final String DB_URL_PREFIX = "jdbc:mysql://";
     private static final String DIR_NAME = "DB-Backup";
-    private static final String TOS_DIR_KEY = "BdpOne/Backup/DB/";
+    private static final String TOS_BUCKET_NAME = "blog-backup-techflowing";
     private static final String CMD = "mysqldump -h%s -p%s -u%s -p%s %s | gzip > %s";
 
     @Value("${spring.datasource.url}")
@@ -55,7 +58,7 @@ public class MySqlBackUp {
         }
         String filePath = getDbBackupFilePath(dir);
         String finalCmd = String.format(CMD, dbServer, dbServerPort, dbUserName, dbPassWord, dbName, filePath);
-
+        log("命令：" + finalCmd);
         try {
             Process process = Runtime.getRuntime().exec(new String[]{"bash", "-c", finalCmd});
             int result = process.waitFor();
@@ -80,8 +83,18 @@ public class MySqlBackUp {
         log("开始上传到TOS");
         File file = new File(filePath);
 
-        // ... 上传
-        log("TOS 上传成功：");
+        try {
+            boolean result = AliOssClient.get().uploadFile(TOS_BUCKET_NAME,
+                    String.format("%s/%s", DIR_NAME, file.getName()), new FileInputStream(file));
+            if (result) {
+                log("TOS 上传成功");
+            } else {
+                log("TOS 上传失败");
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            log("TOS 上传失败：" + e.getMessage());
+        }
     }
 
     private String getDbBackupFilePath(String dir) {
