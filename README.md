@@ -14,8 +14,7 @@ java -jar -Dspring.profiles.active=prod OneSpring-0.0.1.jar > msg-0.0.1.log 2>&1
 
 ## Controller 路径规范
 
-* 统一遵循格式  /大业务/版本/细分业务模块/xxx，例如 `/blog/v1/user/login` 表示 个人博客-账户登录业务，可参考：[RESTful API 设计指南](http://www.ruanyifeng.
-com/blog/2014/05/restful_api.html)
+* 统一遵循格式  /大业务/版本/细分业务模块/xxx，例如 `/blog/v1/user/login` 表示 个人博客-账户登录业务，可参考：[RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
 
 ## 数据库表名规范
 
