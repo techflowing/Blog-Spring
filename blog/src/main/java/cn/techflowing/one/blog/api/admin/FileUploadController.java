@@ -1,16 +1,17 @@
 package cn.techflowing.one.blog.api.admin;
 
 import cn.techflowing.one.ali.oss.AliOssClient;
+import cn.techflowing.one.ali.oss.AliOssConfig;
+import cn.techflowing.one.ali.oss.AliOssUtil;
 import cn.techflowing.one.common.response.Error;
 import cn.techflowing.one.common.response.ErrorCode;
 import cn.techflowing.one.common.response.Feature;
 import cn.techflowing.one.common.response.Response;
-import cn.techflowing.one.util.DateUtil;
-import cn.techflowing.one.util.Md5Util;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,17 +26,15 @@ import java.util.Map;
 @RequestMapping("/blog/v1/admin/upload/")
 public class FileUploadController {
 
-    private static final String BUCKET_NAME = "blog-techflowing";
-
     @PostMapping("image")
     public Object uploadImage(@RequestParam("file") MultipartFile file) {
         if (file == null || file.isEmpty()) {
             return Response.paramsError("数据为空");
         }
-        try {
-            String fileName = formatFileName(file.getOriginalFilename());
-            String key = getImageUploadKey(fileName);
-            boolean result = AliOssClient.get().uploadFile(BUCKET_NAME, key, file.getInputStream());
+        try (InputStream inputStream = file.getInputStream()) {
+            String fileName = AliOssUtil.formatFileName(file.getOriginalFilename());
+            String key = AliOssUtil.getImageUploadKey(fileName);
+            boolean result = AliOssClient.get().uploadFile(AliOssConfig.BLOG_BUCKET_NAME, key, inputStream);
             return result ? Response.success(AliOssClient.getUrl(key)) :
                     Response.fail(Error.of(Feature.Blog.OSS, ErrorCode.FILE_UPLOAD_FAIL, "上传失败"));
         } catch (IOException e) {
@@ -53,25 +52,5 @@ public class FileUploadController {
         map.put("url", url);
         map.put("thumbUrl", url);
         return map;
-    }
-
-    /**
-     * 获取图片上传路径
-     */
-    private String getImageUploadKey(String fileName) {
-        String date = DateUtil.formatTimeToMonthDay(System.currentTimeMillis());
-        return String.format("media-store/image/%s/%s", date, fileName);
-    }
-
-    /**
-     * 获取上传后的文件名称
-     */
-    private String formatFileName(String originFileName) {
-        if (originFileName == null || originFileName.lastIndexOf(".") < 0) {
-            return String.valueOf(System.currentTimeMillis());
-        }
-        String postfix = originFileName.substring(originFileName.lastIndexOf("."));
-        String md5 = Md5Util.getMd5(originFileName);
-        return String.format("%s%s%s", System.currentTimeMillis(), md5, postfix);
     }
 }

@@ -1,3 +1,4 @@
 dependencies {
    implementation deps.tools.ali_oss
+   implementation deps.module.util
 }

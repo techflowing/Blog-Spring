@@ -6,6 +6,7 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
+    jcenter()
     google()
 }
 
@@ -29,6 +30,7 @@ subprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        jcenter()
         google()
     }
 
